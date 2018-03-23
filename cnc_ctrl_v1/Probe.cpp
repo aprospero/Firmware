@@ -23,9 +23,5 @@ bool checkForProbeTouch(const int& probePin) {
   /*
       Check to see if ProbePin has gone LOW
   */
-  if (digitalRead(probePin) == LOW) {
-    readyCommandString = "";
-    return 1;
-  }
-  return 0;
+  return !digitalRead(probePin);
 }

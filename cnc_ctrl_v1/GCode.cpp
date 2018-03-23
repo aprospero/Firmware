@@ -28,7 +28,6 @@ String gcodeLine          = "";  //Our use of this is a bit sloppy, at times,
 
 void initGCode(){
     // Called on startup or after a stop command
-    readyCommandString = "";
     incSerialBuffer.empty();
 }
 
@@ -591,7 +590,6 @@ void gcodeExecuteLoop(){
       incSerialBuffer.prettyReadLine(readyCommandString);
       sanitizeCommandString(readyCommandString);
       status = interpretCommandString(readyCommandString);
-      readyCommandString = "";
 
       // Get next line of GCode
       if (!sys.stop){reportStatusMessage(status);}
