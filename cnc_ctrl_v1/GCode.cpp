@@ -349,10 +349,10 @@ void  executeGcodeLine(const String& gcodeLine){
             G10(gcodeLine);
             break;
         case 20:
-            setInchesToMillimetersConversion(INCHES);
+            sys.inchesToMMConversion = INCHES;
             break;
         case 21:
-            setInchesToMillimetersConversion(MILLIMETERS);
+            sys.inchesToMMConversion = MILLIMETERS;
             break;
         case 38:
             G38(gcodeLine);
@@ -821,6 +821,3 @@ void  G38(const String& readString) {
   }
 }
 
-void  setInchesToMillimetersConversion(float newConversionFactor){
-    sys.inchesToMMConversion = newConversionFactor;
-}
