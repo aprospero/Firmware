@@ -790,7 +790,7 @@ void  G38(const String& readString) {
           }
 
           //check for Probe touchdown
-          if (checkForProbeTouch(ProbePin)) {
+          if (!digitalRead(ProbePin)) {
             zAxis.set(0);
             zAxis.endMove(0);
             zAxis.attach();
