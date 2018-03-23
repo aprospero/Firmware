@@ -20,21 +20,20 @@
 
     class Axis{
         public:
+            MotorGearboxEncoder    motorGearboxEncoder;
+
             void   setup(const int& pwmPin, const int& directionPin1, const int& directionPin2, const int& encoderPin1, const int& encoderPin2, const char& axisName, const unsigned long& loopInterval);
             void   write(const float& targetPosition);
             float  read();
             void   set(const float& newAxisPosition);
             void   setSteps(const long& steps);
-            int    updatePositionFromEncoder();
             void   initializePID(const unsigned long& loopInterval);
             int    detach();
             int    attach();
             void   detachIfIdle();
             void   endMove(const float& finalTarget);
             void   stop();
-            float  target();
             float  error();
-            float  setpoint();
             void   computePID();
             void   disablePositionPID();
             void   enablePositionPID();
@@ -43,12 +42,11 @@
             float  getPitch();
             void   changeEncoderResolution(float* newResolution);
             bool   attached();
-            MotorGearboxEncoder    motorGearboxEncoder;
             void   setPIDValues(float* Kp, float* Ki, float* Kd, float* propWeight, float* KpV, float* KiV, float* KdV, float* propWeightV);
-            String     getPIDString();
-            double     pidInput();
-            double     pidOutput();
-            long  steps();
+            String getPIDString();
+            double pidInput();
+            double pidOutput();
+            long   steps();
             
         private:
             int        _PWMread(int pin);

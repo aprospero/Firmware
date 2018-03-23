@@ -53,10 +53,6 @@ float  Axis::read(){
     
 }
 
-float  Axis::setpoint(){
-    return _pidSetpoint * *_mmPerRotation;
-}
-
 void   Axis::set(const float& newAxisPosition){
     
     //reset everything to the new value
