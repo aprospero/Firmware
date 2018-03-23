@@ -222,7 +222,7 @@ void  returnError(){
         Serial.print(',');
         Serial.print(rightAxis.error());
         Serial.print(',');
-        Serial.print(incSerialBuffer.spaceAvailable());
+        Serial.print(getInBufferFree());
         Serial.println(F("]"));
 }
 

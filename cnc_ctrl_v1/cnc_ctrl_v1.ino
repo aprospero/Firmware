@@ -63,8 +63,7 @@ void setup(){
     leftAxis.write(leftAxis.read());
     rightAxis.write(rightAxis.read());
     zAxis.write(zAxis.read());
-    readyCommandString.reserve(INCBUFFERLENGTH);           //Allocate memory so that this string doesn't fragment the heap as it grows and shrinks
-    gcodeLine.reserve(INCBUFFERLENGTH);
+    initCommandString(INCBUFFERLENGTH);
 
     #ifndef SIMAVR // Using the timer will crash simavr, so we disable it.
                    // Instead, we'll run runsOnATimer periodically in loop().

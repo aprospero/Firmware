@@ -345,8 +345,8 @@ void  _watchDog(){
     
     if ( millis() - sys.lastSerialRcvd > 5000 &&
         (millis() - lastRan) > 5000 && 
-        !leftAxis.attached() and !rightAxis.attached() and !zAxis.attached() &&
-        incSerialBuffer.length() == 0
+        !leftAxis.attached() && !rightAxis.attached() && !zAxis.attached() &&
+        getInBufferUsed() == 0
        ){
           #if defined (verboseDebug) && verboseDebug > 0              
             Serial.println(F("_watchDog requesting new code"));

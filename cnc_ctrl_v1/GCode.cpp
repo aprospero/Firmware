@@ -20,15 +20,33 @@ Copyright 2014-2017 Bar Smith*/
 
 #include "Maslow.h"
 
-RingBuffer incSerialBuffer;
-String readyCommandString = "";  //KRK why is this a global?
-String gcodeLine          = "";  //Our use of this is a bit sloppy, at times,
-                                 //we pass references to this global and then 
-                                 //name them the same thing.
-
+ /* TODO make GCode a Class definition. It has a state, private members and a public interface. It's a class. */
+static RingBuffer incSerialBuffer;
+static String readyCommandString = "";  //KRK why is this a global?
+static String gcodeLine = "";           //The next individual line of gcode (for example G91 G01 X19 would be run as two lines)
+                                        //Our use of this is a bit sloppy, at times we pass references to this global and then
+                                        // name them the same thing.
 void initGCode(){
     // Called on startup or after a stop command
     incSerialBuffer.empty();
+}
+
+void initCommandString(size_t maxSize) {
+	/*
+	 *  Allocate memory so that this string doesn't fragment the heap as it grows
+	 */
+	readyCommandString.reserve(maxSize);
+	gcodeLine.reserve(maxSize);
+}
+
+int getInBufferFree()
+{
+	return incSerialBuffer.spaceAvailable();
+}
+
+int getInBufferUsed()
+{
+	return incSerialBuffer.length();
 }
 
 void readSerialCommands(){

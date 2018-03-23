@@ -22,12 +22,12 @@ Copyright 2014-2017 Bar Smith*/
 #define LINE_FLAG_COMMENT_PARENTHESES bit(0)
 #define LINE_FLAG_COMMENT_SEMICOLON bit(1)
 
-extern String readyCommandString; //next command queued up and ready to send
-extern String gcodeLine; //The next individual line of gcode (for example G91 G01 X19 would be run as two lines)
-
 void initGCode();
+void initCommandString(size_t maxSize);
 void gcodeExecuteLoop();
 void readSerialCommands();
+int  getInBufferFree();
+int  getInBufferUsed();
 String gcodeBufferReadline();
 int   findEndOfNumber(const String&, const int&);
 float extractGcodeValue(const String&, char, const float&);
