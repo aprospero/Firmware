@@ -23,7 +23,8 @@ to be a drop in replacement for a continuous rotation servo.
 
 #include "Maslow.h"
 
-void MotorGearboxEncoder::setup(const int& pwmPin, const int& directionPin1, const int& directionPin2, const int& encoderPin1, const int& encoderPin2, const unsigned long& loopInterval)
+void MotorGearboxEncoder::setup(const int& pwmPin, const int& directionPin1, const int& directionPin2,
+		                               const int& encoderPin1, const int& encoderPin2, const unsigned long& loopInterval)
 {
     //initialize encoder
     encoder.setup(encoderPin1,encoderPin2);
@@ -31,16 +32,14 @@ void MotorGearboxEncoder::setup(const int& pwmPin, const int& directionPin1, con
     float zero = 0.0;
     float one = 1.0;
     _Kp = _Ki = _Kd = &zero;
-    
+
     //initialize motor
     motor.setupMotor(pwmPin, directionPin1, directionPin2);
     motor.write(0);
-    
+
     //initialize the PID
     _PIDController.setup(&_currentSpeed, &_pidOutput, &_targetSpeed, _Kp, _Ki, _Kd, &one, DIRECT);
     initializePID(loopInterval);
-    
-    
 }
 
 void  MotorGearboxEncoder::write(const float& speed){
@@ -101,21 +100,6 @@ String  MotorGearboxEncoder::pidState(){
     
     */
     return _PIDController.pidState();
-}
-
-void MotorGearboxEncoder::setPIDAggressiveness(float aggressiveness){
-    /*
-    
-    The setPIDAggressiveness() function sets the aggressiveness of the PID controller to
-    compensate for a change in the load on the motor.
-    
-    */
-    
-    float adjustedKp = aggressiveness * *_Kp;
-    float one = 1.0;
-    
-    _PIDController.SetTunings(&adjustedKp, _Ki, _Kd, &one);
-    
 }
 
 void MotorGearboxEncoder::setEncoderResolution(float resolution){
@@ -190,16 +174,3 @@ float MotorGearboxEncoder::cachedSpeed(){
     return _RPM;
 }
 
-void MotorGearboxEncoder::setName(char *newName){
-    /*
-    Set the name for the object
-    */
-    _motorName = newName;
-}
-
-char MotorGearboxEncoder::name(){
-    /*
-    Get the name for the object
-    */
-    return *_motorName;
-}

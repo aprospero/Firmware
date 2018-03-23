@@ -26,10 +26,7 @@
             float      cachedSpeed();
             void       write(const float& speed);
             void       computePID();
-            void       setName(char *newName);
-            char       name();
             void       initializePID(const unsigned long& loopInterval);
-            void       setPIDAggressiveness(float aggressiveness);
             void       setPIDValues(float* KpV, float* KiV, float* KdV, float* propWeight);
             void       setEncoderResolution(float resolution);
             float      computeSpeed();
@@ -42,7 +39,6 @@
             volatile double     _lastTimeStamp;
             float               _lastDistMoved;
             float               _RPM;
-            char       *_motorName;
             double     _pidOutput;
             PID        _PIDController;
             float      *_Kp, *_Ki, *_Kd;

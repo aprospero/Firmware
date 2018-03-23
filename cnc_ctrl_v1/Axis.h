@@ -38,7 +38,6 @@
             void   computePID();
             void   disablePositionPID();
             void   enablePositionPID();
-            void   setPIDAggressiveness(float aggressiveness);
             void   test();
             void   changePitch(float* newPitch);
             float  getPitch();

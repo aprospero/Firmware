@@ -32,8 +32,6 @@ void Axis::setup(const int& pwmPin, const int& directionPin1, const int& directi
     _axisName     = axisName;
     
     initializePID(loopInterval);
-    
-    motorGearboxEncoder.setName(&_axisName);
 }
 
 void   Axis::initializePID(const unsigned long& loopInterval){
@@ -145,16 +143,6 @@ String  Axis::getPIDString(){
     return PIDString + *_Kp + ",Ki=" + *_Ki + ",Kd=" + *_Kd;
 }
 
-void   Axis::setPIDAggressiveness(float aggressiveness){
-    /*
-    
-    The setPIDAggressiveness() function sets the aggressiveness of the PID controller to
-    compensate for a change in the load on the motor.
-    
-    */
-    
-    motorGearboxEncoder.setPIDAggressiveness(aggressiveness);
-}
 
 float  Axis::error(){
 
